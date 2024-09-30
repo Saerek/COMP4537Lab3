@@ -22,9 +22,7 @@ class Server {
         const pathname = parsedUrl.pathname;
         const query = parsedUrl.query;
 
-        if (pathname === '/') {
-            this.serveHomePage(res);  // Serve the home page for the root URL
-        } else if (pathname.includes('/writeFile')) {
+        if (pathname.includes('/writeFile')) {
             this.writeFile(query.text, res);
         } else if (pathname.includes('/readFile')) {
             const filePath = path.join(__dirname, 'file.txt');
@@ -32,18 +30,6 @@ class Server {
         } else {
             this.greetUser(query, res);  // Serve the greet user page by default
         }
-    }
-
-    // Serve a home page when users visit the root URL
-    static serveHomePage(res) {
-        const message = `<h1>Welcome to My Node.js App</h1><p>Try the following endpoints:</p>
-        <ul>
-            <li><a href="/greet?name=YourName">/greet?name=YourName</a></li>
-            <li><a href="/writeFile?text=YourText">/writeFile?text=YourText</a></li>
-            <li><a href="/readFile">/readFile</a></li>
-        </ul>`;
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(message);
     }
 
     // C.1: Append text to a file

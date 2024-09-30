@@ -1,4 +1,4 @@
-//This file used ChatGPT to help code
+// This file used ChatGPT to help code
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
@@ -8,12 +8,13 @@ const Messages = require('./lang/en/en');
 
 class Server {
     static start() {
+        const port = process.env.PORT || 3000;
         const server = http.createServer(this.handleRequest.bind(this));
 
-        // Start the server and listen on port 3000
-        server.listen({ port: process.env.PORT || 3000 }).then(({ url }) => {
-            console.log("Server ready at ${url}")
-          });
+        // Start the server and listen on the defined port
+        server.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
     }
 
     static handleRequest(req, res) {
@@ -21,14 +22,28 @@ class Server {
         const pathname = parsedUrl.pathname;
         const query = parsedUrl.query;
 
-        if (pathname.includes('/writeFile')) {
+        if (pathname === '/') {
+            this.serveHomePage(res);  // Serve the home page for the root URL
+        } else if (pathname.includes('/writeFile')) {
             this.writeFile(query.text, res);
         } else if (pathname.includes('/readFile')) {
             const filePath = path.join(__dirname, 'file.txt');
             this.readFile(filePath, res);
         } else {
-            this.greetUser(query, res);
+            this.greetUser(query, res);  // Serve the greet user page by default
         }
+    }
+
+    // Serve a home page when users visit the root URL
+    static serveHomePage(res) {
+        const message = `<h1>Welcome to My Node.js App</h1><p>Try the following endpoints:</p>
+        <ul>
+            <li><a href="/greet?name=YourName">/greet?name=YourName</a></li>
+            <li><a href="/writeFile?text=YourText">/writeFile?text=YourText</a></li>
+            <li><a href="/readFile">/readFile</a></li>
+        </ul>`;
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(message);
     }
 
     // C.1: Append text to a file

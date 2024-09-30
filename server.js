@@ -8,12 +8,11 @@ const Messages = require('./lang/en/en');
 
 class Server {
     static start() {
-        const port = process.env.PORT || 3000
         const server = http.createServer(this.handleRequest.bind(this));
 
-        // Start the server and listen on the defined port
-        server.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
+        // Start the server and listen on port 3000
+        server.listen(3000, () => {
+            console.log('Server is running on port 3000');
         });
     }
 

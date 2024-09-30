@@ -11,9 +11,9 @@ class Server {
         const server = http.createServer(this.handleRequest.bind(this));
 
         // Start the server and listen on port 3000
-        server.listen(3000, () => {
-            console.log('Server is running on port 3000');
-        });
+        server.listen({ port: process.env.PORT || 3000 }).then(({ url }) => {
+            console.log("Server ready at ${url}")
+          });
     }
 
     static handleRequest(req, res) {

@@ -1,5 +1,12 @@
 {
   "scripts": {
-    "build": "node server.js"
-  }
+    "build": "node server.js",
+    "start": "node server.js"
+  },
+  "name": "lab-3-b",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

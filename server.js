@@ -6,15 +6,20 @@ const path = require('path');
 const Utils = require('./modules/utils');
 const Messages = require('./lang/en/en');
 
-class Server {
-    static start() {
-        const server = http.createServer(this.handleRequest.bind(this));
 
-        // Start the server and listen on port 3000
-        server.listen(3000, () => {
-            console.log('Server is running on port 3000');
+class MyServer {
+    static start() {
+        const port = process.env.PORT || 3000;
+        server.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
         });
     }
+}
+
+module.exports = MyServer;
+
+
+class Server {
 
     static handleRequest(req, res) {
         const parsedUrl = url.parse(req.url, true);
@@ -90,5 +95,6 @@ class Server {
 }
 
 // Start the server
-const myServer = new Server();
+const myServer = require('./path/to/myServer');
+
 myServer.start();

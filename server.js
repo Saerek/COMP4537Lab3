@@ -90,4 +90,5 @@ class Server {
 }
 
 // Start the server
-Server.start();
+const myServer = new Server();
+myServer.start();

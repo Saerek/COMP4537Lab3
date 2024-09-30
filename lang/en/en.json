@@ -1,0 +1,9 @@
+  {
+    "greeting": "Hello %1, What a beautiful day. Server current date and time is %2",
+    "missingName": "Name parameter is missing!",
+    "writeSuccess": "Text written to file successfully.",
+    "writeError": "Error writing to file!",
+    "missingText": "Text parameter is missing!",
+    "invalidEndpoint": "Endpoint not found!",
+    "fileNotFound": "Error 404: File \"%1\" not found!"
+  }
